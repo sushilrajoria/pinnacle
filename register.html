@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Tier 4</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:700" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+
+<style>
+
+
+input[type=text], input[type=file] {
+  width: 50%;
+  font-family: 'Nunito', sans-serif;
+  color: #00BFA5;
+  border:2px solid;
+  font-size: 25px;
+  border-color: #00BFA5;
+  border-radius: 4px;
+  background-color: Transparent;
+  padding: 10px;
+}
+
+button#signout{
+  float: right;
+  font-family: 'Nunito', sans-serif;
+  color: #FFF;
+  border:1px solid;
+  margin:10px;
+  font-size: 25px;
+  border-color: #FFF;
+  padding: 5px;
+  background-color: Transparent;
+}
+#signout:hover {
+  cursor: pointer;
+  color: #00BFA5;
+  background-color: #FFF;
+}
+
+
+button {
+  font-family: 'Nunito', sans-serif;
+  color: #00BFA5;
+  border:2px solid;
+  font-size: 25px;
+  margin:30px;
+  border-color: #00BFA5;
+  background-color: Transparent;
+  padding: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+button:hover{
+  cursor: pointer;
+  color: #FFF;
+  background-color: #00BFA5;
+}
+
+img.avatar {
+    width: 25%;
+    border-radius: 50%;
+}
+
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+#registrationDiv
+{
+  margin-top: 53px;
+}
+
+
+#registrationError
+{
+  color: red;
+  font-size: 20px;
+	margin-top: 2%;
+}
+
+body {
+    background: url("typing-in-nature.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+
+
+
+
+
+
+
+label, input {
+  color: #333;
+  font: 14px/20px Arial;
+}
+
+label {
+  display: inline-block;
+  width: 5em;
+  padding: 0 1em;
+  text-align: right;
+}
+
+/* Hide the file input using
+opacity */
+[type=file] {
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+input{
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  text-align: left;
+  padding: 10px;
+/*  width: 150px; */
+  width: 30%;
+  margin: 0;
+  left: 0;
+  position: relative;
+
+}
+[type=file] + label {
+  font-family: 'Nunito', sans-serif;
+  color: #00BFA5;
+  border: 2px solid;
+  font-size: 25px;
+  margin: 30px;
+  border-color: #00BFA5;
+  border-radius: 3px;
+  background-color: Transparent;
+  padding: 20px;
+  text-align: center;
+  width: 30%;
+  margin: 0;
+  left: 0;
+  position: relative;
+
+
+}
+[type=file] + label:hover {
+  cursor: pointer;
+  color: #FFF;
+  background: #00BFA5;
+}
+
+#user_email{
+  color: #FFF;
+  font-size: 25px;
+  padding: 15px;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;}
+
+#progressBar{
+		display: none;
+}
+
+
+#progress
+{
+  width: 50%;
+}
+.welcome_strip
+{
+	text-align: center;
+	font-family: 'Nunito', sans-serif;
+	color: #00BFA5;
+  font-size: 58px;
+	margin: 0 auto;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #00BFA5;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 200px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+
+
+
+</head>
+
+<body  class="cover">
+
+  <div class="container" style="background-color:#00BFA5;font-family: 'Nunito', sans-serif;width:100%; margin:autoStart">
+	    <div class="row">
+		        <span id="user_email"></span>
+	          <button type="button" id="signout">Log Out</button> <br>
+	    </div>
+	</div>
+
+<div class="loader" id="loading"></div>
+
+<div id="registrationDiv">
+
+    <div class="container">
+
+        <div class="row formatting"> <center><span class="welcome_strip">Kindly fill this registration form </span></center> </div> <br><br>
+
+        <div class="row"> <center> <input type="text" name="name" id="name" placeholder="Enter your name" required> </center> </div> <br><br>
+
+        <div class="row"> <center> <input type="text" name="contactNumber" id="contactNumber" placeholder="Enter Contact Number" required>  </center> </div> <br>  <br>
+
+        <div class="row"> <center> <input type="text" name="rollNo" id="rollNo"  placeholder="Enter your Roll No" required>  </center> </div> <br>  <br>
+
+        <div class="row"> <center> <input type="file" accept="image/jpg, image/jpeg, image/x-png" name="image" id="image"  placeholder="Upload your photo" required>  <label for="image">Upload your photo</label>  </center> </div>
+
+        <div class="row"> <center>  <div id="registrationError"></div> </div>
+
+        <div class="row"> <center>  <button type="button"  id="registerButton">Submit</button> </center> </div>  <br><br>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="progress-bar progress-bar-striped active" id="progressBar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+      70%
+    </div>
+  </div>
+
+
+  <script src="config.js"></script>
+	<script src="register.js"></script>
+
+<script>
+
+$("[type=file]").on("change", function(){
+  // Name of file and placeholder
+  var file = this.files[0].name;
+  var dflt = $(this).attr("placeholder");
+  if($(this).val()!=""){
+    $(this).next().text(file);
+  } else {
+    $(this).next().text(dflt);
+  }
+});
+</script>
+
+
+</body>
+</html>
